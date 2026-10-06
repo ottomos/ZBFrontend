@@ -1,0 +1,49 @@
+{
+  "name": "kafka-nextjs-dashboard",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --webpack",
+    "ensure:bank-symbols": "node scripts/ensure-bank-symbols.mjs",
+    "predev": "npm run ensure:bank-symbols",
+    "prebuild": "npm run ensure:bank-symbols",
+    "prestart": "npm run ensure:bank-symbols && node scripts/prepare-standalone.mjs",
+    "build": "next build --webpack",
+    "start": "node -r dotenv/config .next/standalone/server.js",
+    "lint": "eslint"
+  },
+  "dependencies": {
+    "@tanstack/react-virtual": "^3.14.13",
+    "@types/bcryptjs": "^3.0.0",
+    "@types/jsonwebtoken": "^9.0.10",
+    "bcryptjs": "^3.0.3",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "echarts": "^6.1.0",
+    "echarts-for-react": "^3.0.6",
+    "echarts-gl": "^2.1.0",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "kafkajs": "^2.2.4",
+    "lucide-react": "^1.47.0",
+    "next": "^16.2.9",
+    "nodemailer": "^9.0.1",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "react-split": "^2.0.14",
+    "three": "^0.184.0"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3",
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/nodemailer": "^7.0.4",
+    "@types/react": "^19.2.2",
+    "@types/react-dom": "^19.2.2",
+    "eslint": "^9",
+    "eslint-config-next": "15.5.3",
+    "playwright": "^1.61.0",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}

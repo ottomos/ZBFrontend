@@ -1,0 +1,17 @@
+Dockerfile
+.dockerignore
+node_modules
+npm-debug.log
+README.md
+.next
+.git
+.env*
+.env
+.env.local
+.env.docker
+.env.extr
+.env.development.local
+.env.test.local
+.env.production.local
+build
+dist
