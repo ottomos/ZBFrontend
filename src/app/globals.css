@@ -1,0 +1,1277 @@
+@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Embed Roboto Mono font locally */
+@font-face {
+  font-family: 'Roboto Mono';
+  src: url('/fonts/RobotoMono-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Roboto Mono';
+  src: url('/fonts/RobotoMono-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  --bg-canvas: #000b19;
+  --surface-topbar: #071525;
+  --surface-panel: #081727;
+  --surface-table-head: #081a2e;
+  --surface-table-body: #05121f;
+  --surface-input: #0b1d31;
+  --border-grid: #102a43;
+  --primary: #03409f;
+  --primary-hover: #0756c8;
+  --primary-active: #023477;
+  --focus-ring: #55a7ff;
+  --secondary-action: #082342;
+  --secondary-hover: #0b2d52;
+  --secondary-active: #061a31;
+  --danger-action: #8e283c;
+  --danger-hover: #b33449;
+  --danger-active: #6f1f30;
+  --status-normal-text: #68c197;
+  --status-normal-bg: #071b1a;
+  --status-closed-bg: #162330;
+  --success-dot: #2eda8b;
+  --critical-bg: #3e111a;
+  --critical: #ee585e;
+  --warning-bg: #3c300f;
+  --warning-text: #d6a23a;
+  --text-primary: #d1d9e2;
+  --text-secondary: #a4afbd;
+  --text-muted: #79a7cd;
+  --topbar-text-strong: #b7d2e8;
+  --disabled-bg: #0a1828;
+  --disabled-text: #5f7489;
+  --border-panel: #1a3853;
+  --border-control: #1b4267;
+}
+
+html {
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: 'Roboto Mono', monospace;
+}
+
+.app-shell,
+.app-topbar {
+  background: var(--bg-canvas);
+}
+
+.app-topbar {
+  padding-top: 8px;
+  padding-bottom: 0px;
+  font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+}
+
+.app-topbar :is(button, span, div) {
+  font-family: inherit !important;
+}
+
+.app-topbar :is(.topnav-brand-island, .topnav-box) {
+  border: 1px solid var(--border-panel) !important;
+  border-radius: 8px !important;
+  background: var(--surface-topbar) !important;
+  box-shadow: 0 2px 6px rgb(0 0 0 / 28%), inset 0 1px 0 rgb(121 167 205 / 6%);
+}
+
+.app-topbar .topnav-tab {
+  color: var(--text-muted);
+  padding-top: 10px !important;
+  padding-bottom: 10px !important;
+  font-size: var(--topnav-tab-font-size, 15px) !important;
+  font-weight: 500 !important;
+  line-height: 20px !important;
+  border-radius: 7px;
+}
+
+.app-topbar .topnav-tab:hover,
+.app-topbar .topnav-menu-item:hover {
+  color: var(--topbar-text-strong);
+  background: var(--secondary-hover);
+}
+
+.app-topbar :is(.topnav-tab--active, .topnav-menu-item--active, .topnav-entity-option--active) {
+  color: #fff;
+  background: var(--primary);
+  border-color: var(--primary);
+  box-shadow: 0 2px 6px rgb(3 64 159 / 42%), inset 0 1px 0 rgb(255 255 255 / 14%);
+}
+
+.app-topbar .topnav-menu {
+  border: 1px solid var(--border-control);
+  border-radius: 6px;
+  background: var(--surface-panel);
+}
+
+.app-topbar .topnav-menu-item,
+.app-topbar .topnav-entity-option {
+  color: var(--text-muted);
+}
+
+.app-topbar .topnav-menu-item {
+  font-size: 15px !important;
+  line-height: 20px !important;
+}
+
+.app-topbar .topnav-entity-option {
+  padding: 5px 6px !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  line-height: 20px !important;
+}
+
+.app-topbar .topnav-entity-option--active {
+  color: #fff !important;
+  background: var(--primary) !important;
+  box-shadow: 0 2px 6px rgb(3 64 159 / 42%), inset 0 1px 0 rgb(255 255 255 / 14%);
+}
+
+.app-topbar .topnav-entity-option:not(:disabled):hover {
+  color: var(--topbar-text-strong);
+  background: var(--secondary-hover);
+}
+
+.app-topbar .topnav-icon-action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  padding: 4px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.app-topbar .topnav-icon-action--account {
+  background: var(--primary);
+  box-shadow: 0 2px 6px rgb(3 64 159 / 46%), inset 0 1px 0 rgb(255 255 255 / 18%);
+}
+
+.app-topbar .topnav-icon-action--account:hover {
+  background: var(--primary-hover);
+  box-shadow: 0 3px 8px rgb(7 86 200 / 50%), inset 0 1px 0 rgb(255 255 255 / 20%);
+}
+
+.app-topbar .topnav-icon-action--logout {
+  background: var(--danger-action);
+  box-shadow: 0 2px 6px rgb(142 40 60 / 46%), inset 0 1px 0 rgb(255 255 255 / 18%);
+}
+
+.app-topbar .topnav-icon-action--logout:hover {
+  background: var(--danger-hover);
+  box-shadow: 0 3px 8px rgb(179 52 73 / 50%), inset 0 1px 0 rgb(255 255 255 / 20%);
+}
+
+.dashboard-islands {
+  background: var(--bg-canvas);
+}
+
+.dashboard-islands .table-container {
+  width: calc(100% - 8px);
+  height: calc(100% - 8px);
+  margin: 4px;
+  /* margin: 1px 8px 8px 8px; */
+  border: 1px solid var(--border-grid);
+  border-radius: 8px;
+  background: var(--surface-panel);
+  box-shadow: 0 1px 2px rgb(0 0 0 / 18%);
+}
+
+.dashboard-islands .trade-blue-table {
+  background: var(--surface-panel) !important;
+  color: var(--text-primary);
+  padding: 4px 8px 8px 8px !important;
+}
+
+.dashboard-islands .trade-blue-table thead {
+  background: var(--surface-table-head) !important;
+}
+
+.dashboard-islands .trade-blue-table tbody tr {
+  background: var(--surface-table-body) !important;
+}
+
+.dashboard-islands .trade-blue-table tbody tr:nth-child(even) {
+  background: var(--surface-panel) !important;
+}
+
+.dashboard-islands .trade-blue-table tbody tr:hover {
+  background: var(--secondary-hover) !important;
+}
+
+.dashboard-islands .trade-blue-table :is(th, td, tr) {
+  border-color: var(--border-grid) !important;
+}
+
+.dashboard-islands .trade-blue-table th {
+  color: #fff !important;
+}
+
+.dashboard-islands .trade-blue-table td {
+  color: var(--text-primary);
+}
+
+.dashboard-islands .trade-header-icon {
+  color: var(--text-muted);
+}
+
+.dashboard-islands .trade-header-title {
+  color: #fff;
+}
+
+.dashboard-islands .trade-status {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font: inherit;
+}
+
+.dashboard-islands .trade-blue-table td.trade-status-cell--normal {
+  background: transparent !important;
+  color: var(--status-normal-text) !important;
+}
+
+.dashboard-islands .trade-blue-table td.trade-status-cell--warning {
+  background: var(--warning-bg) !important;
+  color: #fff !important;
+}
+
+.dashboard-islands .trade-blue-table td.trade-status-cell--critical {
+  background: var(--critical-bg) !important;
+  color: #fff !important;
+}
+
+.dashboard-islands .trade-blue-table td.trade-status-cell--closed {
+  background: var(--status-closed-bg) !important;
+  color: #fff !important;
+}
+
+.dashboard-islands .trade-blue-table td.trade-status-cell--neutral {
+  background: transparent !important;
+  color: var(--text-secondary) !important;
+}
+
+.dashboard-islands .trade-status-dot {
+  width: 6px;
+  height: 6px;
+  flex: 0 0 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.dashboard-islands .trade-status-cell--critical .trade-status-dot {
+  background: var(--critical);
+}
+
+.dashboard-islands .trade-status-cell--warning .trade-status-dot {
+  background: var(--warning-text);
+}
+
+.dashboard-islands .trade-blue-table .custom-table-search-input,
+.dashboard-islands .trade-blue-table input[type="search"] {
+  height: 30px !important;
+  min-height: 30px !important;
+  border: 1px solid var(--border-control) !important;
+  border-radius: 6px !important;
+  background-color: var(--surface-input) !important;
+  color: var(--text-primary) !important;
+}
+
+.dashboard-islands .trade-blue-table :is(input, button, select):focus-visible {
+  outline: 2px solid var(--focus-ring) !important;
+  outline-offset: 1px;
+}
+
+.dashboard-islands .table-header-controls,
+.dashboard-islands .table-header-controls-inner {
+  min-height: 40px;
+}
+
+.dashboard-islands .table-header-control,
+.dashboard-islands .table-header-action-btn {
+  min-height: 30px;
+  height: 30px;
+}
+
+.dashboard-islands button[aria-label^="Resize"] {
+  display: block;
+  position: relative;
+  background-color: transparent !important;
+}
+
+.dashboard-islands button[aria-label^="Resize"]::after {
+  content: none;
+}
+
+/* All text except table internals and table headers: 14px (1 smaller than 15px) */
+body, p, span, label, input, select, textarea, .table-search, .table-filter, .btn, button, .table-dropdown, .account-info, .metrics-info, .top-nav, .nav-tabs, .tab-label, .close-btn {
+  font-size: 14px;
+}
+
+/* Table header, buttons, dropdowns, and controls: system sans-serif */
+.table-header, .data-table thead th, .strategy-table thead th, .execution-table thead th, .risk-table thead th,
+button, .btn, .table-dropdown, .data-table select, .strategy-table select, .execution-table select, .risk-table select {
+  font-family:  'Segoe UI' !important;
+  font-size: 9px !important;
+  font-weight: bold !important;
+}
+
+/* Login card buttons (Sign In, Forgot Password?, Send New Password, Back to
+   Login) opt out of the 9px bold button styling above. */
+.login-btn {
+  font-size: 15px !important;
+  font-weight: 400 !important;
+}
+
+/* Table internals (cells): Roboto Mono, 13px, not bold */
+.table-body, .data-table tbody td, .strategy-table tbody td, .execution-table tbody td, .risk-table tbody td {
+  font-family: 'Segoe UI';
+  font-size: 13px;
+  font-weight: 400;
+}
+
+/* Search and filter inputs: system sans-serif, 13px, not bold, matching dropdowns/buttons */
+.table-search, .table-filter, .data-table input[type="search"], .strategy-table input[type="search"], .execution-table input[type="search"], .risk-table input[type="search"],
+.data-table input[type="text"], .strategy-table input[type="text"], .execution-table input[type="text"], .risk-table input[type="text"] {
+  font-family: 'Segoe UI';
+  font-size: 9px;
+  font-weight: 400;
+}
+
+/* Filter panel label and search label: Segoe UI */
+.filter-panel-label, .custom-table-search-label {
+  font-family: 'Segoe UI', Arial, Helvetica, sans-serif !important;
+}
+
+/* Filter panel select: Segoe UI, text-xs */
+.filter-panel-select-xs {
+  font-family: 'Segoe UI', Arial, Helvetica, sans-serif !important;
+  font-size: 0.75rem !important; /* text-xs = 12px */
+  font-weight: 400 !important;
+}
+
+/* Dropdown text bold */
+.table-dropdown, .data-table select, .strategy-table select, .execution-table select, .risk-table select {
+  font-weight: 500;
+  font-family: 'Segoe UI';
+  font-size: 13px !important;
+}
+
+/* Highly specific selector for dropdowns inside tables */
+.data-table select, .strategy-table select, .execution-table select, .risk-table select {
+  font-family: 'Segoe UI' !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+}
+
+/* Custom dropdown style for all table dropdowns */
+.custom-dropdown, .strategy-table select, .execution-table select, .risk-table select {
+  font-family: 'Segoe UI' !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  background: #102236 !important;
+  background-color: #102236 !important;
+  color: white !important;
+  border: none !important;
+  box-shadow: none !important;
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  forced-color-adjust: none;
+  color-scheme: dark;
+  padding: 0 !important;
+  margin: 0 !important;
+  min-width: 0 !important;
+  min-height: 28px !important;
+  line-height: 28px !important;
+}
+
+/* Increase space between select text and native dropdown arrow */
+.custom-dropdown {
+  padding-right: 1.25rem !important;
+}
+
+/* Manual Trade card symbol selector should match card background only in this context. */
+.custom-dropdown.manual-trade-symbol-dropdown {
+  background: #0A1929 !important;
+  background-color: #0A1929 !important;
+}
+
+.manual-trade-symbol-menu {
+  background: #0A1929 !important;
+  background-color: #0A1929 !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+}
+
+.manual-trade-symbol-option {
+  text-align: center !important;
+}
+
+.manual-trade-symbol-option:hover {
+  background: #1A334C !important;
+}
+
+.custom-dropdown option, .custom-dropdown optgroup {
+  background: #102236;
+  background-color: #102236;
+  color: #fff;
+  forced-color-adjust: none;
+}
+
+.themed-dropdown-trigger,
+.themed-dropdown-option {
+  font-family: 'Segoe UI', Arial, Helvetica, sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+}
+
+/* Filter panel dropdowns: match filter panel text (11px, normal weight) */
+.custom-dropdown.filter-panel-dropdown,
+.themed-dropdown-trigger.filter-panel-dropdown,
+.custom-dropdown.filter-panel-dropdown span,
+.themed-dropdown-trigger.filter-panel-dropdown span,
+.themed-dropdown-option.filter-panel-dropdown-option {
+  font-size: 11px !important;
+  font-weight: 400 !important;
+  font-family: 'Segoe UI', Arial, Helvetica, sans-serif !important;
+  line-height: 1.4 !important;
+}
+
+/* Left inset for the trigger text so it isn't flush against the border */
+.custom-dropdown.filter-panel-dropdown {
+  padding-left: 8px !important;
+}
+
+.themed-dropdown-option.filter-panel-dropdown-option {
+  padding-top: 3px !important;
+  padding-bottom: 3px !important;
+  padding-left: 10px !important;
+  padding-right: 10px !important;
+}
+
+/* TEST: filter panel buttons styled like the Close All Positions button (roll back by deleting this rule) */
+.filter-panel-btn {
+  border: none !important;
+  background-color: #2C5680 !important;
+  color: #fff !important;
+  transition: background-color 0.15s ease;
+}
+.filter-panel-btn:hover {
+  background-color: #61AAD9 !important;
+  filter: none !important;
+}
+
+select,
+option,
+optgroup {
+  color-scheme: dark;
+  forced-color-adjust: none;
+}
+
+/* Scoped override for overview table header selects */
+.overview-table-select {
+  font-family: 'Segoe UI' !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  color: #fff !important;
+  background: #102236 !important;
+  background-color: #102236 !important;
+  border: none !important;
+  box-shadow: none !important;
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  color-scheme: dark;
+  padding: 0 !important;
+  margin: 0 !important;
+  min-width: 0 !important;
+  min-height: 28px !important;
+  line-height: 28px !important;
+  padding-right: 1.25rem !important;
+}
+
+.overview-table-select option, .overview-table-select optgroup {
+  background: #102236;
+  color: #fff;
+}
+
+.overview-period-select {
+  background: #102236 !important;
+  background-color: #102236 !important;
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  color-scheme: dark;
+  min-width: 140px !important;
+}
+
+.overview-period-select option,
+.overview-period-select optgroup {
+  background: #102236;
+  color: #fff;
+}
+
+/* Position and Price table row names (headers): Roboto Mono, 11px, bold */
+.position-table-header, .data-table.position-and-price thead th {
+  font-family: 'Segoe UI';
+  font-size: 10px;
+  font-weight: bold;
+}
+
+/* Position and Price table search input: Roboto Mono, 12px, not bold */
+.position-table-search, .data-table.position-and-price input[type="search"], .data-table.position-and-price input[type="text"] {
+  font-family: 'Segoe UI';
+  font-size: 12px;
+  font-weight: 400;
+}
+
+/* Table headers (top row in the picture) bold for all tables */
+.data-table thead th, .strategy-table thead th, .execution-table thead th, .risk-table thead th {
+  font-family: 'Segoe UI';
+  font-size: 13px;
+  font-weight: bold;
+}
+
+/* Search label ("Search:") not bold */
+.search-label, label.search-label {
+  font-weight: 400;
+  font-family: 'Segoe UI';
+}
+
+/* Make table search label and input smaller and match table style */
+.custom-table-search-label {
+  font-size: 14px !important;
+  font-weight: 400 !important;
+  color: #ededed !important;
+  display: none !important;
+  align-items: center;
+  min-height: 28px;
+  line-height: 1 !important;
+}
+.custom-table-search-input,
+input[type="search"] {
+  font-size: 14px !important;
+  font-family: 'Segoe UI' !important;
+  color: #ededed !important;
+  background: #1A334C !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%238AB4F8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='m20 20-3.5-3.5'/%3E%3C/svg%3E") !important;
+  background-position: 9px center !important;
+  background-repeat: no-repeat !important;
+  background-size: 16px 16px !important;
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+  padding: 2px 6px 2px 34px !important;
+  height: 28px !important;
+  min-height: 28px !important;
+  line-height: 1 !important;
+  box-sizing: border-box;
+}
+
+.custom-table-search-input:focus,
+input[type="search"]:focus {
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+.position-pnl-search-input {
+  /* same as base .custom-table-search-input */
+}
+
+.table-header-controls {
+  min-height: 32px;
+}
+
+.table-header-controls-inner {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: 32px;
+}
+
+.table-header-control {
+  display: flex;
+  align-items: center;
+  min-height: 28px;
+}
+
+.table-header-icon-btn {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.table-header-action-btn {
+  height: 28px;
+  min-height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1 !important;
+}
+
+/* Custom Scrollbar Styles - Apply to ALL elements */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #2D3748 #0F1419;
+}
+
+*::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #0F1419;
+  border-radius: 6px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: #2D3748;
+  border-radius: 6px;
+  border: none;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: #4A5568;
+}
+
+*::-webkit-scrollbar-corner {
+  background: #0F1419;
+}
+
+/* Specific scrollbar classes for compatibility */
+.scrollbar-thin {
+  scrollbar-width: thin;
+  scrollbar-color: #2D3748 #0F1419;
+}
+
+.scrollbar-track-gray-800::-webkit-scrollbar-track {
+  background: #0F1419;
+}
+
+.scrollbar-thumb-gray-600::-webkit-scrollbar-thumb {
+  background: #2D3748;
+  border-radius: 6px;
+}
+
+.scrollbar-thumb-gray-600::-webkit-scrollbar-thumb:hover {
+  background: #4A5568;
+}
+
+/* Overview tables: blueish grid lines instead of grayish */
+.overview-blue-table td,
+.overview-blue-table th,
+.overview-blue-table tr {
+  border-color: #22456b;
+}
+
+/* Overview tables: blueish scrollbar + hover highlight */
+.overview-blue-table .overflow-auto {
+  scrollbar-color: #2a4e78 #0a1929;
+}
+
+.overview-blue-table .overflow-auto::-webkit-scrollbar-track {
+  background: #0a1929;
+}
+
+.overview-blue-table .overflow-auto::-webkit-scrollbar-thumb {
+  background: #2a4e78;
+}
+
+.overview-blue-table .overflow-auto::-webkit-scrollbar-thumb:hover {
+  background: #3b6198;
+}
+
+/* Trade page tables: reuse overview blue scheme and tune search input/dropdowns */
+.trade-blue-table td,
+.trade-blue-table th,
+.trade-blue-table tr {
+  border-color: #22456b;
+}
+
+.trade-blue-table .overflow-auto {
+  scrollbar-color: #2a4e78 #0a1929;
+}
+
+.trade-blue-table .overflow-auto::-webkit-scrollbar-track {
+  background: #0a1929;
+}
+
+.trade-blue-table .overflow-auto::-webkit-scrollbar-thumb {
+  background: #2a4e78;
+}
+
+.trade-blue-table .overflow-auto::-webkit-scrollbar-thumb:hover {
+  background: #3b6198;
+}
+
+.trade-blue-table .custom-table-search-input {
+  background-color: #1A334C !important;
+  border: none !important;
+}
+
+/* Transaction list tables: align scrollbars with blue theme */
+.transaction-blue-table .overflow-auto {
+  scrollbar-color: #2a4e78 #0a1929;
+}
+
+.transaction-blue-table .overflow-auto::-webkit-scrollbar-track {
+  background: #0a1929;
+}
+
+.transaction-blue-table .overflow-auto::-webkit-scrollbar-thumb {
+  background: #2a4e78;
+}
+
+.transaction-blue-table .overflow-auto::-webkit-scrollbar-thumb:hover {
+  background: #3b6198;
+}
+
+.transaction-blue-table .scrollbar-track-gray-800::-webkit-scrollbar-track {
+  background: #0a1929;
+}
+
+.transaction-blue-table .scrollbar-thumb-gray-600::-webkit-scrollbar-thumb {
+  background: #2a4e78;
+}
+
+.transaction-blue-table .scrollbar-thumb-gray-600::-webkit-scrollbar-thumb:hover {
+  background: #3b6198;
+}
+
+/* Close button styling for consistent appearance across all tables */
+.close-button {
+  font-size: 18px !important;
+  font-weight: bold;
+  padding: 0;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+  top: -7px;
+}
+
+/* Override Tailwind's .text-xs class globally for larger font size and font weight */
+.text-xs {
+  font-family: 'Segoe UI' !important;
+  font-size: 0.85rem !important; /* Adjust as needed, default is 0.75rem */
+  font-weight: 400 !important; /* Medium boldness for button text */
+}
+
+/* Trade dashboard production theme. Keep this after legacy rules. */
+.app-topbar .topnav-box {
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+}
+
+.app-topbar .topnav-section-label {
+  margin: 0;
+  padding: 0;
+  color: var(--text-muted) !important;
+  font-family: 'Segoe UI', Arial, Helvetica, sans-serif !important;
+  font-size: 12.5px !important;
+  font-weight: 500 !important;
+  line-height: 15px !important;
+}
+
+.app-topbar .topnav-entity-label {
+  margin-bottom: 8px;
+}
+
+.app-topbar .topnav-account-details {
+  min-width: 0;
+  color: var(--text-muted);
+}
+
+.app-topbar .topnav-account-name,
+.app-topbar .topnav-clock {
+  color: var(--topbar-text-strong) !important;
+}
+
+.app-topbar .topnav-account-role {
+  color: var(--text-muted) !important;
+}
+
+.app-topbar .topnav-metric-label {
+  color: var(--text-muted) !important;
+  font-size: 12.5px !important;
+  font-weight: 500 !important;
+  line-height: 20px !important;
+}
+
+.app-topbar .topnav-metric-value {
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  line-height: 20px !important;
+}
+
+.app-topbar .topnav-metric-value--neutral {
+  color: #fff !important;
+}
+
+.app-topbar .topnav-metrics-content,
+.app-topbar .topnav-metrics-body {
+  display: flex;
+  min-width: 0;
+  width: 100%;
+  flex-direction: column;
+}
+
+.app-topbar .topnav-metrics-content {
+  height: 100%;
+  justify-content: center;
+}
+
+.app-topbar .topnav-metrics-body {
+  gap: 0;
+}
+
+.app-topbar .topnav-metric-row,
+.app-topbar .topnav-metric-group {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  white-space: nowrap;
+}
+
+.app-topbar .topnav-metric-split {
+  display: grid;
+  min-width: 0;
+  width: 100%;
+  grid-template-columns: minmax(120px, 0.8fr) minmax(170px, 1.2fr);
+  gap: 30px;
+}
+
+.app-topbar .topnav-metric-label,
+.app-topbar .topnav-metric-value {
+  white-space: nowrap;
+}
+
+.app-topbar .topnav-metric-value {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+}
+
+.dashboard-islands .trade-blue-table {
+  background: var(--surface-panel) !important;
+  color: var(--text-primary);
+}
+
+.dashboard-islands .table-header-controls {
+  --trade-header-top-spacing: 6px;
+  --trade-header-bottom-spacing: 6px;
+  height: 30px;
+  min-height: 30px;
+  margin-top: var(--trade-header-top-spacing) !important;
+  margin-bottom: var(--trade-header-bottom-spacing) !important;
+}
+
+.dashboard-islands .table-header-controls-inner {
+  height: 30px;
+  min-height: 30px;
+}
+
+.dashboard-islands .table-header-controls .table-header-control:first-child {
+  padding-left: 4px !important;
+}
+
+.dashboard-islands .table-header-controls .table-header-control:first-child :is(.custom-dropdown, .themed-dropdown-trigger) {
+  background: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+
+.dashboard-islands .trade-header-title,
+.dashboard-islands .table-header-controls .table-header-control:first-child .themed-dropdown-trigger > span:first-child {
+  color: #fff !important;
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  line-height: 20px !important;
+}
+
+.dashboard-islands :is(.table-header-control, .table-header-icon-btn, .table-header-action-btn) {
+  height: 30px;
+  min-height: 30px;
+}
+
+.dashboard-islands .custom-table-search-label {
+  display: none !important;
+  min-height: 30px;
+  color: var(--text-secondary) !important;
+  font-size: 10px !important;
+  font-weight: 400 !important;
+  line-height: 14px !important;
+}
+
+.dashboard-islands .table-header-controls-inner > .ml-12 {
+  margin-left: 12px !important;
+  gap: 8px !important;
+}
+
+.dashboard-islands .custom-table-search-input,
+.dashboard-islands .trade-blue-table input[type="search"] {
+  height: 30px !important;
+  min-height: 30px !important;
+  color: var(--text-primary) !important;
+  background-color: var(--surface-input) !important;
+  border: 1px solid var(--border-control) !important;
+  border-radius: 6px !important;
+}
+
+.dashboard-islands .custom-table-search-input::placeholder,
+.dashboard-islands .trade-blue-table input::placeholder {
+  color: var(--text-muted);
+  opacity: 1;
+}
+
+.dashboard-islands .trade-blue-table thead,
+.dashboard-islands .trade-blue-table thead tr {
+  height: 40px;
+  background: var(--surface-table-head) !important;
+}
+
+.dashboard-islands .trade-blue-table table {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.dashboard-islands .trade-blue-table thead tr:first-child th:first-child {
+  border-top-left-radius: 6px;
+}
+
+.dashboard-islands .trade-blue-table thead tr:first-child th:last-child {
+  border-top-right-radius: 6px;
+}
+
+.dashboard-islands .trade-blue-table thead th {
+  height: 40px !important;
+  padding-top: 5px !important;
+  padding-bottom: 5px !important;
+  color: #fff !important;
+  font-size: 11px !important;
+  font-weight: 400 !important;
+  line-height: 14px !important;
+  border-color: var(--border-grid) !important;
+  border-top: 1px solid var(--border-grid) !important;
+}
+
+.dashboard-islands .trade-blue-table thead th:first-child {
+  border-left: 1px solid var(--border-grid) !important;
+}
+
+.dashboard-islands .trade-blue-table thead th:last-child {
+  border-right: 1px solid var(--border-grid) !important;
+}
+
+.dashboard-islands .trade-blue-table tbody tr,
+.dashboard-islands .trade-blue-table tbody td {
+  height: 27px !important;
+  border-color: var(--border-grid) !important;
+}
+
+/* Continue the outer frame down the left/right sides and across the bottom of
+   the body, matching the rounded corners already drawn by the header cells. */
+.dashboard-islands .trade-blue-table tbody tr td:first-child {
+  border-left: 1px solid var(--border-grid) !important;
+}
+
+.dashboard-islands .trade-blue-table tbody tr td:last-child {
+  border-right: 1px solid var(--border-grid) !important;
+}
+
+.dashboard-islands .trade-blue-table tbody tr:last-child td {
+  border-bottom: 1px solid var(--border-grid) !important;
+}
+
+/* Round the bottom corners to match the top corners drawn by the header. */
+.dashboard-islands .trade-blue-table tbody tr:last-child td:first-child {
+  border-bottom-left-radius: 6px;
+}
+
+.dashboard-islands .trade-blue-table tbody tr:last-child td:last-child {
+  border-bottom-right-radius: 6px;
+}
+
+.dashboard-islands .trade-blue-table tbody tr:nth-child(odd) {
+  background: var(--surface-table-body) !important;
+}
+
+.dashboard-islands .trade-blue-table tbody tr:nth-child(even) {
+  background: var(--surface-panel) !important;
+}
+
+.dashboard-islands .trade-blue-table tbody tr:hover {
+  background: var(--secondary-hover) !important;
+}
+
+.dashboard-islands :is(.custom-dropdown, .themed-dropdown-trigger, .manual-trade-symbol-dropdown),
+.dashboard-islands .trade-filter-panel :is(input, button) {
+  color: var(--text-primary) !important;
+  background-color: var(--surface-input) !important;
+  border-color: var(--border-control) !important;
+}
+
+.dashboard-islands .trade-filter-panel {
+  color: var(--text-primary);
+  background: var(--surface-table-head) !important;
+  border: 1px solid var(--border-control);
+  border-radius: 8px;
+}
+
+.dashboard-islands .filter-panel-btn {
+  color: #fff !important;
+  background: var(--primary) !important;
+  border-color: var(--primary) !important;
+}
+
+.dashboard-islands .filter-panel-btn:hover {
+  background: var(--primary-hover) !important;
+}
+
+.dashboard-islands :is(.trade-primary-action, .trade-secondary-action, .trade-danger-action) {
+  color: #fff !important;
+  border-radius: 5px;
+}
+
+.dashboard-islands .trade-primary-action:not(:disabled) {
+  background: var(--primary) !important;
+  border-color: var(--primary) !important;
+}
+
+.dashboard-islands .trade-primary-action:not(:disabled):hover {
+  background: var(--primary-hover) !important;
+}
+
+.dashboard-islands .trade-primary-action:not(:disabled):active {
+  background: var(--primary-active) !important;
+}
+
+.dashboard-islands .trade-secondary-action:not(:disabled) {
+  background: var(--secondary-action) !important;
+  border-color: var(--border-control) !important;
+}
+
+.dashboard-islands .trade-secondary-action:not(:disabled):hover {
+  background: var(--secondary-hover) !important;
+}
+
+.dashboard-islands .trade-secondary-action:not(:disabled):active {
+  background: var(--secondary-active) !important;
+}
+
+.dashboard-islands .trade-danger-action:not(:disabled) {
+  background: var(--danger-action) !important;
+  border-color: var(--danger-action) !important;
+}
+
+.dashboard-islands .trade-danger-action:not(:disabled):hover {
+  background: var(--danger-hover) !important;
+}
+
+.dashboard-islands .trade-danger-action:not(:disabled):active {
+  background: var(--danger-active) !important;
+}
+
+.dashboard-islands .table-header-action-btn.trade-primary-action {
+  border: 1px solid var(--primary-hover) !important;
+  box-shadow: 0 2px 6px rgb(3 64 159 / 42%), inset 0 1px 0 rgb(255 255 255 / 16%);
+}
+
+.dashboard-islands .table-header-action-btn.trade-danger-action {
+  border: 1px solid var(--danger-hover) !important;
+  box-shadow: 0 2px 6px rgb(142 40 60 / 42%), inset 0 1px 0 rgb(255 255 255 / 16%);
+}
+
+.dashboard-islands .table-header-action-btn .trade-action-icon {
+  flex: 0 0 auto;
+  margin-right: 6px;
+}
+
+.dashboard-islands .table-header-action-btn {
+  white-space: nowrap;
+  transition: none !important;
+}
+
+.dashboard-islands :is(.trade-primary-action, .trade-secondary-action, .trade-danger-action):disabled {
+  color: var(--disabled-text) !important;
+  background: var(--disabled-bg) !important;
+  border-color: var(--border-control) !important;
+  box-shadow: none !important;
+}
+
+.dashboard-islands .trade-blue-table tbody .trade-secondary-action {
+  color: var(--text-muted) !important;
+  background: var(--secondary-action) !important;
+  border: 1px solid var(--border-control) !important;
+  border-radius: 4px !important;
+  box-shadow: 0 1px 4px rgb(3 64 159 / 28%), inset 0 1px 0 rgb(255 255 255 / 8%);
+  font-size: 10px !important;
+  font-weight: 500 !important;
+  line-height: 14px !important;
+}
+
+.dashboard-islands .trade-blue-table tbody .trade-row-primary-action {
+  color: #fff !important;
+  border: 1px solid var(--primary-hover) !important;
+  box-shadow: 0 1px 4px rgb(3 64 159 / 34%), inset 0 1px 0 rgb(255 255 255 / 10%);
+  font-size: 10px !important;
+  font-weight: 500 !important;
+  line-height: 14px !important;
+}
+
+.dashboard-islands .trade-positive-text {
+  color: var(--status-normal-text) !important;
+}
+
+.dashboard-islands .trade-critical-text {
+  color: var(--critical) !important;
+}
+
+.dashboard-islands .trade-toggle-track {
+  background: var(--disabled-bg) !important;
+  border: 1px solid var(--border-control);
+}
+
+.dashboard-islands input:checked + .trade-toggle-track {
+  background: var(--primary) !important;
+  border-color: var(--primary);
+}
+
+.dashboard-islands input:disabled + .trade-toggle-track {
+  background: var(--secondary-action) !important;
+  border-color: var(--border-control) !important;
+}
+
+.dashboard-islands input:disabled + .trade-toggle-track > div {
+  background: var(--text-muted) !important;
+}
+
+.dashboard-islands .trade-confirmation,
+.dashboard-islands .trade-alert {
+  color: var(--text-primary) !important;
+  background: var(--surface-table-head) !important;
+  border-radius: 8px !important;
+  box-shadow: 0 1px 2px rgb(0 0 0 / 18%) !important;
+}
+
+.dashboard-islands .trade-confirmation--start {
+  border-color: var(--primary) !important;
+}
+
+.dashboard-islands :is(.trade-confirmation--stop, .trade-alert--critical) {
+  border-color: var(--danger-action) !important;
+}
+
+.dashboard-islands .strategy-table tbody input[type="text"] {
+  color: #fff !important;
+  background: var(--warning-bg) !important;
+  border-color: var(--warning-text) !important;
+  border-radius: 5px !important;
+}
+
+.dashboard-islands .manual-trade-card {
+  color: var(--text-primary);
+  background: var(--surface-table-body);
+  border-color: var(--border-panel);
+  box-shadow: 0 1px 2px rgb(0 0 0 / 18%);
+}
+
+.dashboard-islands .manual-trade-mode {
+  color: var(--text-secondary);
+  background: var(--surface-input);
+  border-color: var(--border-control);
+}
+
+.dashboard-islands .manual-trade-mode:hover {
+  color: var(--text-primary);
+  background: var(--secondary-hover);
+}
+
+.dashboard-islands .manual-trade-mode--active {
+  color: #fff;
+  background: var(--primary);
+  border-color: var(--primary);
+}
+
+.dashboard-islands .manual-trade-layout-menu,
+.dashboard-islands .manual-trade-symbol-menu {
+  color: var(--text-primary) !important;
+  background: var(--surface-panel) !important;
+  border-color: var(--border-control) !important;
+}
+
+.dashboard-islands .manual-trade-symbol-option:hover {
+  background: var(--secondary-hover) !important;
+}
+
+.dashboard-islands .manual-trade-view input[type="checkbox"] {
+  accent-color: var(--primary);
+}
+
+.dashboard-islands .trade-blue-table .overflow-auto {
+  scrollbar-color: var(--border-control) var(--surface-table-body);
+}
+
+.dashboard-islands .trade-blue-table .overflow-auto::-webkit-scrollbar-track {
+  background: var(--surface-table-body);
+}
+
+.dashboard-islands .trade-blue-table .overflow-auto::-webkit-scrollbar-thumb {
+  background: var(--border-control);
+  border-radius: 6px;
+}
+
+.dashboard-islands .trade-blue-table .overflow-auto::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-hover);
+}
+
+.dashboard-islands .trade-blue-table .table-header-action-btn.trade-primary-action:not(:disabled) {
+  color: #fff !important;
+  background: var(--primary) !important;
+  border-color: var(--primary-hover) !important;
+}
+
+.dashboard-islands .trade-blue-table .table-header-action-btn.trade-danger-action:not(:disabled) {
+  color: #fff !important;
+  background: var(--danger-action) !important;
+  border-color: var(--danger-hover) !important;
+}
