@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 
 // ---- Login logo size ----
-// Change this single number to resize the logo on the login card.
+// Change this single number to resize the Ziraat Katilim logo on the login card.
 // It is a percentage of the card's inner (padded) width, so it scales with the
 // card. 150% of the 540px card keeps the artwork at the same rendered size it
 // had at 173% of the old 420px card, while now fitting inside the card border.
@@ -18,10 +18,7 @@ const LOGO_TRIM_TOP_PERCENT = 0;
 // carries ~4px of transparent padding at its bottom, which is subtracted here.
 const LOGO_GAP_BELOW_PX = 32;
 
-// The logo PNG has ~31.5% transparent padding on its right edge and none on the
-// left, so the artwork looks shifted left when the image is centered. Nudging it
-// right by half of that padding (percent of the image's own width) visually
-// centers the artwork on the card.
+// Horizontal adjustment for the logo artwork within the login card.
 const LOGO_OFFSET_X_PERCENT = 0;
 
 // Extra pull-up (px) applied only to the "Change Password" heading, so the
@@ -243,8 +240,8 @@ export default function LoginPage() {
       >
         <div className="flex flex-col items-center">
           <img
-            src="/kfh-logo-giris.png"
-            alt="KFH APEX - Analytics | Performance | Excellence"
+            src="/ziraat-katilim-seeklogo.png"
+            alt="Ziraat Katilim"
             className="object-contain"
             style={{
               width: `${LOGO_SIZE_PERCENT}%`,

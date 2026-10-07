@@ -291,7 +291,7 @@ export default function AccountPage() {
           >
             <div className="mb-4 flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <img src="/kfh-logo-top.png" alt="KFH APEX" className="h-10 w-auto object-contain" />
+                <img src="/ziraat-katilim-seeklogo.png" alt="Ziraat Katilim" className="h-10 w-auto object-contain" />
               </div>
               <button
                 type="button"

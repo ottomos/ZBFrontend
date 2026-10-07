@@ -13,7 +13,7 @@ const EMPTY_METRICS_ROWS: Array<{ 'Unrealized PNL': string; 'Realized PNL': stri
 const POSITION_POLL_MS = kafkaPollInterval(5_000);
 
 // ---- Top-bar logo size ----
-// Tweak these to resize the KFH APEX logo in the header.
+// Tweak these to resize the Ziraat Katilim logo in the header.
 // Height is what you normally want to change; width is the box it is fitted into
 // (objectFit: 'contain' keeps the aspect ratio, so extra width just adds slack).
 const NAV_LOGO_HEIGHT_PX = 60;
@@ -499,8 +499,8 @@ export function TopNavigation({
         >
           <div className="flex items-center">
             <img
-              src="/kfh-logo-top.png"
-              alt="KFH APEX"
+              src="/ziraat-katilim-seeklogo.png"
+              alt="Ziraat Katilim"
               style={{
                 width: NAV_LOGO_WIDTH_PX,
                 height: NAV_LOGO_HEIGHT_PX,
